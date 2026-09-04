@@ -13,6 +13,24 @@ X=df[['Pclass','Embarked','Sex','Age','Fare']]
 y=df['Survived']
 X_train,X_test,y_train,y_test=train_test_split(X,y,test_size=0.2,random_state=42)
 from sklearn.neighbors import KNeighborsClassifier
-knn=KNeighborsClassifier(n_neighbors=1)#when n=1 then it would be 0.962(not 1)(hint:the closest member to any point is the point itself:distance=0) symbolizes that there is duplicate data for all 4 columns
-knn.fit(X_train,y_train)
-print(round(knn.score(X_train, y_train), 3))
+knn=KNeighborsClassifier(n_neighbors=5)#when n=1 then it would be 0.962(not 1)(hint:the closest member to any point is the point itself:distance=0) symbolizes that there is duplicate data for all 4 columns
+
+#scaling
+from sklearn.preprocessing import StandardScaler
+scaler=StandardScaler()#here scaler is a object it contains entities of mean and standard deviation
+X_scaler_train=scaler.fit_transform(X_train)
+X_scaler_test=scaler.transform(X_test)
+knn.fit(X_scaler_train,y_train)
+print(round(knn.score(X_scaler_test,y_test),3))#score gets the ouput for its predicted y compares it with true y values and gives accuracy %
+#alternate approach to knn.score(X_scaler_test,y_test)
+y_pred=knn.predict(X_scaler_test)
+
+from sklearn.metrics import accuracy_score
+print(accuracy_score(y_test,y_pred))
+
+#logistic regression
+from sklearn.linear_model import LogisticRegression
+model=LogisticRegression()
+model.fit(X_scaler_train,y_train)
+y_pred2=model.predict(X_scaler_test)
+print(accuracy_score(y_test,y_pred2)) # comparison of logistic regression answer with real test output
