@@ -21,16 +21,28 @@ scaler=StandardScaler()#here scaler is a object it contains entities of mean and
 X_scaler_train=scaler.fit_transform(X_train)
 X_scaler_test=scaler.transform(X_test)
 knn.fit(X_scaler_train,y_train)
-print(round(knn.score(X_scaler_test,y_test),3))#score gets the ouput for its predicted y compares it with true y values and gives accuracy %
+print("knn classifer account:",round(knn.score(X_scaler_test,y_test),3))#score gets the ouput for its predicted y compares it with true y values and gives accuracy %
 #alternate approach to knn.score(X_scaler_test,y_test)
 y_pred=knn.predict(X_scaler_test)
 
 from sklearn.metrics import accuracy_score
-print(accuracy_score(y_test,y_pred))
+print("alternative approach of knn output: ",accuracy_score(y_test,y_pred))
 
 #logistic regression
 from sklearn.linear_model import LogisticRegression
 model=LogisticRegression()
 model.fit(X_scaler_train,y_train)
 y_pred2=model.predict(X_scaler_test)
-print(accuracy_score(y_test,y_pred2)) # comparison of logistic regression answer with real test output
+print("logistic regression: ",accuracy_score(y_test,y_pred2)) # comparison of logistic regression answer with real test output
+
+#decision tree classifier:
+from sklearn.tree import DecisionTreeClassifier
+dt=DecisionTreeClassifier(random_state=42)
+dt.fit(X_scaler_train,y_train)
+print("decision tree classifier output: ",round(dt.score(X_scaler_test,y_test),3))
+#random forest classifier:
+from sklearn.ensemble import RandomForestClassifier
+rf=RandomForestClassifier(random_state=42)
+rf.fit(X_scaler_train,y_train)
+print("random forest classifier: ",round(rf.score(X_scaler_test,y_test),3))
+n answer with real test output
