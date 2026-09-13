@@ -45,4 +45,11 @@ from sklearn.ensemble import RandomForestClassifier
 rf=RandomForestClassifier(random_state=42)
 rf.fit(X_scaler_train,y_train)
 print("random forest classifier: ",round(rf.score(X_scaler_test,y_test),3))
-n answer with real test output
+
+#confusion matrix
+from sklearn.metrics import confusion_matrix,classification_report
+y_pred1=rf.predict(X_scaler_test)
+print(confusion_matrix(y_test,y_pred1))
+print(classification_report(y_test,y_pred1))
+
+
