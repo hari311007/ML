@@ -35,7 +35,7 @@ model.fit(X_scaler_train,y_train)
 y_pred2=model.predict(X_scaler_test)
 print("logistic regression: ",accuracy_score(y_test,y_pred2)) # comparison of logistic regression answer with real test output
 
-#decision tree classifier:
+#decision tree classifier
 from sklearn.tree import DecisionTreeClassifier
 dt=DecisionTreeClassifier(random_state=42)
 dt.fit(X_scaler_train,y_train)
